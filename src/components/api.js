@@ -1,6 +1,6 @@
 export default async function predictHeart(data) {
     try {
-        const response = await fetch(`${process.env.data_yha_hai}/predict`, {
+        const response = await fetch(`https://heart-disease-backend-5-r82r.onrender.com/predict`, {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),
