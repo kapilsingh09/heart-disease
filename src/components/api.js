@@ -1,6 +1,6 @@
 export default async function predictHeart(data) {
     try {
-        const response = await fetch(`https://heart-disease-backend-4-g3m1.onrender.com//predict`, {
+        const response = await fetch(`https://heart-disease-backend-4-g3m1.onrender.com/predict`, {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),
