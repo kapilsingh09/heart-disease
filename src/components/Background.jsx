@@ -9,8 +9,8 @@ const Background = () => {
       <nav className="bg-zinc-900 text-white border-b-2 border-white/20 h-20 w-full flex items-center justify-between px-6 md:px-12  py-2 md:py-0">
         {/* Logo Section */}
         <div className="text-2xl font-semibold flex gap-2 items-center mb-2 md:mb-0">
-          <Heart className='h-8 w-8' />
-          <div>Miss waguri</div>
+          <Heart className='h-8 w-8 text-green-500'  />
+          <p className='underline'>Miss waguri</p>
         </div>
 
         {/* Profile Image */}
