@@ -1,4 +1,4 @@
-export default async function predictHeart(data) {
+const predictHeart = async (data) => {
     try {
         const response = await fetch(`https://heart-disease-backend-4-g3m1.onrender.com/predict`, {
             method: 'POST',
@@ -21,3 +21,5 @@ export default async function predictHeart(data) {
         return "Error: Could not get prediction";
     }
 }
+
+export default predictHeart;

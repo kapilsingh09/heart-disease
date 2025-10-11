@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Heart, Activity, Stethoscope, Info, X } from "lucide-react";
-import predictHeart from './api'
+// import predictHeart from './api'
+// import predictHeart from "./api";
+import predictHeart from "../api";
 
 /**
  * InfoTooltip
@@ -87,8 +89,8 @@ const HeartForm = () => {
       // Call the prediction API
       const result = await predictHeart(formData);
       setPrediction(result);
-    } catch (err) {
-      setPrediction("Error: Unable to get prediction. Please try again.");
+    } catch (error) {
+      setPrediction("Error: Unable to get prediction. Please try again.",error);
     }
     setLoading(false);
   };
@@ -112,7 +114,7 @@ const HeartForm = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-pink-900 py-6 px-2 sm:px-4">
+    <div className="min-h-screen  py-6 px-2 sm:px-4">
       <div className="max-w-4xl mx-auto flex flex-col gap-6">
         {/* Header */}
         <div className="text-center mb-4">
@@ -387,7 +389,7 @@ const HeartForm = () => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white p-4 rounded-lg font-semibold text-lg hover:from-blue-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-200 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+              className="w-full bg-green-600 text-white p-4 rounded-lg font-semibold text-lg transform hover:scale-101  hover:cursor-pointer transition-all duration-200 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
             >
               {loading ? (
                 <span className="flex items-center justify-center">
