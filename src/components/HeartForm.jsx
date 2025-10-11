@@ -43,7 +43,7 @@ const HeartForm = () => {
 
   // Form state
   const [formData, setFormData] = useState({
-    Age: 50,
+    Age: 19,
     Sex: "M",
     ChestPainType: "ATA",
     RestingBP: 120,
