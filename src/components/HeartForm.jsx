@@ -1,36 +1,30 @@
 import React, { useState } from "react";
 import { Heart, Activity, Stethoscope, Info, X } from "lucide-react";
+// import predictHeart from './api'
+// import predictHeart from "./api";
 import predictHeart from "../api";
 
 /**
  * InfoTooltip
- * Shows an info icon with a tooltip on hover or tap (for mobile).
+ * Shows an info icon with a tooltip on hover.
  * @param {string} title - Tooltip title
  * @param {string} description - Tooltip description
  */
 const InfoTooltip = ({ title, description }) => {
   const [show, setShow] = useState(false);
-
-  // Support touch devices
-  const toggleTooltip = (e) => {
-    e.preventDefault();
-    setShow((prev) => !prev);
-  };
-
   return (
-    <div className="relative inline-block ml-2 z-40">
+    <div className="relative inline-block ml-2">
       <button
         type="button"
         onMouseEnter={() => setShow(true)}
         onMouseLeave={() => setShow(false)}
-        onTouchStart={toggleTooltip}
-        className="text-blue-400 hover:text-blue-300 transition-colors focus:outline-none"
+        className="text-blue-400 hover:text-blue-300 transition-colors"
         aria-label={`Info about ${title}`}
       >
         <Info size={16} />
       </button>
       {show && (
-        <div className="absolute z-50 w-60 sm:w-64 p-3 bg-gray-700 text-white text-sm rounded-lg shadow-xl left-8 sm:left-6 top-0 transform -translate-y-1/4 sm:-translate-y-1/4">
+        <div className="absolute z-10 w-64 p-3 bg-gray-700 text-white text-sm rounded-lg shadow-xl left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center">
           <div className="font-semibold mb-1">{title}</div>
           <div className="text-gray-300">{description}</div>
         </div>
@@ -96,7 +90,7 @@ const HeartForm = () => {
       const result = await predictHeart(formData);
       setPrediction(result);
     } catch (error) {
-      setPrediction("Error: Unable to get prediction. Please try again.", error);
+      setPrediction("Error: Unable to get prediction. Please try again.",error);
     }
     setLoading(false);
   };
@@ -120,28 +114,28 @@ const HeartForm = () => {
   };
 
   return (
-    <div className="min-h-screen py-4 px-1 sm:px-4 bg-no-repeat bg-cover">
-      <div className="max-w-4xl mx-auto flex flex-col gap-4 md:gap-6 w-full">
+    <div className="min-h-screen  py-6 px-2 sm:px-4">
+      <div className="max-w-4xl mx-auto flex flex-col gap-6">
         {/* Header */}
-        <div className="text-center mb-2 sm:mb-4">
-          <div className="flex flex-col xs:flex-row items-center justify-center mb-2 sm:mb-3 gap-2">
-            <Heart className="text-red-400 mr-0 sm:mr-3" size={36} />
-            <h1 className="text-2xl xs:text-3xl sm:text-4xl font-bold text-white">
+        <div className="text-center mb-4">
+          <div className="flex items-center justify-center mb-3">
+            <Heart className="text-red-400 mr-3" size={40} />
+            <h1 className="text-3xl sm:text-4xl font-bold text-white">
               Heart Disease Prediction
             </h1>
           </div>
-          <p className="text-gray-300 text-sm xs:text-base sm:text-lg">
+          <p className="text-gray-300 text-base sm:text-lg">
             Enter patient information to assess heart disease risk
           </p>
         </div>
 
         {/* Main Form Card */}
-        <div className="max-w-7xl w-full bg-white/10 backdrop-blur-lg rounded-xl sm:rounded-2xl p-2 xs:p-4 sm:p-8 shadow-2xl mx-auto">
-          <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-5">
+        <div className=" max-w-7xl  w-full bg-white/10 backdrop-blur-lg rounded-2xl p-4 sm:p-8 shadow-2xl">
+          <form onSubmit={handleSubmit} className="space-y-5">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {/* Age */}
               <div>
-                <label className="flex flex-wrap items-center text-white font-medium mb-1 sm:mb-2">
+                <label className="flex items-center text-white font-medium mb-2">
                   Age
                   <InfoTooltip title="Age" description={fieldInfo.Age} />
                 </label>
@@ -149,7 +143,7 @@ const HeartForm = () => {
                   type="number"
                   value={formData.Age}
                   onChange={handleChange("Age")}
-                  className="w-full bg-white/20 border border-white/30 p-2 sm:p-3 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all text-sm sm:text-base"
+                  className="w-full bg-white/20 border border-white/30 p-3 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all"
                   min="18"
                   max="100"
                   required
@@ -158,14 +152,14 @@ const HeartForm = () => {
 
               {/* Sex */}
               <div>
-                <label className="flex flex-wrap items-center text-white font-medium mb-1 sm:mb-2">
+                <label className="flex items-center text-white font-medium mb-2">
                   Sex
                   <InfoTooltip title="Sex" description={fieldInfo.Sex} />
                 </label>
                 <select
                   value={formData.Sex}
                   onChange={handleChange("Sex")}
-                  className="w-full bg-white/20 border border-white/30 p-2 sm:p-3 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all text-sm sm:text-base"
+                  className="w-full bg-white/20 border border-white/30 p-3 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all"
                   required
                 >
                   <option value="M" className="bg-gray-800">
@@ -179,7 +173,7 @@ const HeartForm = () => {
 
               {/* Chest Pain Type */}
               <div>
-                <label className="flex flex-wrap items-center text-white font-medium mb-1 sm:mb-2">
+                <label className="flex items-center text-white font-medium mb-2">
                   Chest Pain Type
                   <InfoTooltip
                     title="Chest Pain Type"
@@ -189,7 +183,7 @@ const HeartForm = () => {
                 <select
                   value={formData.ChestPainType}
                   onChange={handleChange("ChestPainType")}
-                  className="w-full bg-white/20 border border-white/30 p-2 sm:p-3 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all text-sm sm:text-base"
+                  className="w-full bg-white/20 border border-white/30 p-3 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all"
                   required
                 >
                   <option value="ATA" className="bg-gray-800">
@@ -209,7 +203,7 @@ const HeartForm = () => {
 
               {/* Resting BP */}
               <div>
-                <label className="flex flex-wrap items-center text-white font-medium mb-1 sm:mb-2">
+                <label className="flex items-center text-white font-medium mb-2">
                   Resting BP (mm Hg)
                   <InfoTooltip
                     title="Resting Blood Pressure"
@@ -220,7 +214,7 @@ const HeartForm = () => {
                   type="number"
                   value={formData.RestingBP}
                   onChange={handleChange("RestingBP")}
-                  className="w-full bg-white/20 border border-white/30 p-2 sm:p-3 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all text-sm sm:text-base"
+                  className="w-full bg-white/20 border border-white/30 p-3 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all"
                   min="80"
                   max="200"
                   required
@@ -229,7 +223,7 @@ const HeartForm = () => {
 
               {/* Cholesterol */}
               <div>
-                <label className="flex flex-wrap items-center text-white font-medium mb-1 sm:mb-2">
+                <label className="flex items-center text-white font-medium mb-2">
                   Cholesterol (mg/dL)
                   <InfoTooltip
                     title="Cholesterol"
@@ -240,7 +234,7 @@ const HeartForm = () => {
                   type="number"
                   value={formData.Cholesterol}
                   onChange={handleChange("Cholesterol")}
-                  className="w-full bg-white/20 border border-white/30 p-2 sm:p-3 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all text-sm sm:text-base"
+                  className="w-full bg-white/20 border border-white/30 p-3 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all"
                   min="100"
                   max="600"
                   required
@@ -249,7 +243,7 @@ const HeartForm = () => {
 
               {/* Fasting BS */}
               <div>
-                <label className="flex flex-wrap items-center text-white font-medium mb-1 sm:mb-2">
+                <label className="flex items-center text-white font-medium mb-2">
                   Fasting BS {">"} 120 mg/dL
                   <InfoTooltip
                     title="Fasting Blood Sugar"
@@ -259,7 +253,7 @@ const HeartForm = () => {
                 <select
                   value={formData.FastingBS}
                   onChange={handleChange("FastingBS")}
-                  className="w-full bg-white/20 border border-white/30 p-2 sm:p-3 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all text-sm sm:text-base"
+                  className="w-full bg-white/20 border border-white/30 p-3 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all"
                   required
                 >
                   <option value={0} className="bg-gray-800">
@@ -273,7 +267,7 @@ const HeartForm = () => {
 
               {/* Resting ECG */}
               <div>
-                <label className="flex flex-wrap items-center text-white font-medium mb-1 sm:mb-2">
+                <label className="flex items-center text-white font-medium mb-2">
                   Resting ECG
                   <InfoTooltip
                     title="Resting ECG"
@@ -283,7 +277,7 @@ const HeartForm = () => {
                 <select
                   value={formData.RestingECG}
                   onChange={handleChange("RestingECG")}
-                  className="w-full bg-white/20 border border-white/30 p-2 sm:p-3 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all text-sm sm:text-base"
+                  className="w-full bg-white/20 border border-white/30 p-3 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all"
                   required
                 >
                   <option value="Normal" className="bg-gray-800">
@@ -300,7 +294,7 @@ const HeartForm = () => {
 
               {/* Max HR */}
               <div>
-                <label className="flex flex-wrap items-center text-white font-medium mb-1 sm:mb-2">
+                <label className="flex items-center text-white font-medium mb-2">
                   Max Heart Rate
                   <InfoTooltip
                     title="Maximum Heart Rate"
@@ -311,7 +305,7 @@ const HeartForm = () => {
                   type="number"
                   value={formData.MaxHR}
                   onChange={handleChange("MaxHR")}
-                  className="w-full bg-white/20 border border-white/30 p-2 sm:p-3 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all text-sm sm:text-base"
+                  className="w-full bg-white/20 border border-white/30 p-3 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all"
                   min="60"
                   max="220"
                   required
@@ -320,7 +314,7 @@ const HeartForm = () => {
 
               {/* Exercise Angina */}
               <div>
-                <label className="flex flex-wrap items-center text-white font-medium mb-1 sm:mb-2">
+                <label className="flex items-center text-white font-medium mb-2">
                   Exercise Angina
                   <InfoTooltip
                     title="Exercise Angina"
@@ -330,7 +324,7 @@ const HeartForm = () => {
                 <select
                   value={formData.ExerciseAngina}
                   onChange={handleChange("ExerciseAngina")}
-                  className="w-full bg-white/20 border border-white/30 p-2 sm:p-3 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all text-sm sm:text-base"
+                  className="w-full bg-white/20 border border-white/30 p-3 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all"
                   required
                 >
                   <option value="Y" className="bg-gray-800">
@@ -344,7 +338,7 @@ const HeartForm = () => {
 
               {/* Oldpeak */}
               <div>
-                <label className="flex flex-wrap items-center text-white font-medium mb-1 sm:mb-2">
+                <label className="flex items-center text-white font-medium mb-2">
                   Oldpeak
                   <InfoTooltip
                     title="Oldpeak"
@@ -355,7 +349,7 @@ const HeartForm = () => {
                   type="number"
                   value={formData.Oldpeak}
                   onChange={handleChange("Oldpeak")}
-                  className="w-full bg-white/20 border border-white/30 p-2 sm:p-3 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all text-sm sm:text-base"
+                  className="w-full bg-white/20 border border-white/30 p-3 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all"
                   step="0.1"
                   min="0"
                   max="6"
@@ -365,7 +359,7 @@ const HeartForm = () => {
 
               {/* ST Slope */}
               <div>
-                <label className="flex flex-wrap items-center text-white font-medium mb-1 sm:mb-2">
+                <label className="flex items-center text-white font-medium mb-2">
                   ST Slope
                   <InfoTooltip
                     title="ST Slope"
@@ -375,7 +369,7 @@ const HeartForm = () => {
                 <select
                   value={formData.ST_Slope}
                   onChange={handleChange("ST_Slope")}
-                  className="w-full bg-white/20 border border-white/30 p-2 sm:p-3 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all text-sm sm:text-base"
+                  className="w-full bg-white/20 border border-white/30 p-3 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all"
                   required
                 >
                   <option value="Up" className="bg-gray-800">
@@ -395,7 +389,7 @@ const HeartForm = () => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-green-600 text-white p-3 sm:p-4 rounded-lg font-semibold text-base sm:text-lg transform hover:scale-[1.01] hover:cursor-pointer transition-all duration-200 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+              className="w-full bg-green-600 text-white p-4 rounded-lg font-semibold text-lg transform hover:scale-101  hover:cursor-pointer transition-all duration-200 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
             >
               {loading ? (
                 <span className="flex items-center justify-center">
@@ -418,10 +412,10 @@ const HeartForm = () => {
                       d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                     ></path>
                   </svg>
-                  <span className="text-sm sm:text-base">Analyzing...</span>
+                  Analyzing...
                 </span>
               ) : (
-                <span className="text-sm sm:text-lg">Predict Heart Disease Risk</span>
+                "Predict Heart Disease Risk"
               )}
             </button>
           </form>
@@ -429,7 +423,7 @@ const HeartForm = () => {
           {/* Prediction Result */}
           {prediction && (
             <div
-              className={`mt-4 sm:mt-6 p-4 sm:p-6 text-center font-bold text-base sm:text-lg rounded-xl shadow-lg transform transition-all duration-500 ${
+              className={`mt-6 p-6 text-center font-bold text-lg rounded-xl shadow-lg transform transition-all duration-500 ${
                 prediction.includes("Low")
                   ? "bg-green-500/30 border-2 border-green-400 text-green-100"
                   : prediction.startsWith("Error")
@@ -439,34 +433,34 @@ const HeartForm = () => {
             >
               <div className="flex items-center justify-center mb-2">
                 {prediction.includes("Low") ? (
-                  <Heart className="mr-2 text-green-300" size={24} />
+                  <Heart className="mr-2 text-green-300" size={28} />
                 ) : prediction.startsWith("Error") ? (
-                  <Info className="mr-2 text-yellow-300" size={24} />
+                  <Info className="mr-2 text-yellow-300" size={28} />
                 ) : (
-                  <Activity className="mr-2 text-red-300" size={24} />
+                  <Activity className="mr-2 text-red-300" size={28} />
                 )}
               </div>
-              <span className="break-words">{prediction}</span>
+              {prediction}
             </div>
           )}
         </div>
 
         {/* About Section - always at the bottom, can be closed */}
         {showAbout && (
-          <div className="w-full bg-white/10 mt-4 backdrop-blur-lg rounded-xl sm:rounded-2xl p-3 xs:p-4 sm:p-6 text-white shadow-2xl relative max-w-3xl mx-auto">
+          <div className="w-full bg-white/10 mt-4 backdrop-blur-lg rounded-2xl p-4 sm:p-6 text-white shadow-2xl relative max-w-3xl mx-auto">
             {/* Close Button */}
             <button
               onClick={() => setShowAbout(false)}
-              className="absolute top-3 right-3 sm:top-4 sm:right-4 text-white hover:text-red-400"
+              className="absolute top-4 right-4 text-white hover:text-red-400"
               aria-label="Close About Section"
             >
               <X size={20} />
             </button>
-            <div className="flex items-center mb-3 sm:mb-4">
-              <Stethoscope className="mr-2 text-blue-400" size={20} />
-              <h3 className="text-lg sm:text-xl font-semibold">About This Tool</h3>
+            <div className="flex items-center mb-4">
+              <Stethoscope className="mr-2 text-blue-400" size={24} />
+              <h3 className="text-xl font-semibold">About This Tool</h3>
             </div>
-            <div className="space-y-2 sm:space-y-3 text-xs sm:text-sm text-gray-300">
+            <div className="space-y-3 text-sm text-gray-300">
               <p>
                 This prediction tool uses machine learning to assess the risk of
                 heart disease based on clinical parameters.
@@ -481,7 +475,7 @@ const HeartForm = () => {
         {!showAbout && (
           <button
             onClick={() => setShowAbout(true)}
-            className="bg-blue-500 text-white px-4 py-2 rounded-md mt-2 hover:bg-blue-600 max-w-xs w-full xs:w-auto mx-auto"
+            className="bg-white/20  text-white px-4 py-2 w-full rounded-md mt-2 hover:bg-white/30 max-w-xs mx-auto"
           >
             Show About
           </button>
