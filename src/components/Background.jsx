@@ -63,10 +63,9 @@ const Background = () => {
 
       {/* Footer */}
       <footer className="bg-zinc-900/90 text-white border-t border-white/10 py-6 mt-12 backdrop-blur-md">
-        <div className="container mx-auto flex flex-col md:flex-row items-center justify-between px-6 md:px-12 space-y-4 md:space-y-0">
+        <div className="container mx-auto flex flex-col md:flex-row items-center justify-between px-6 mdspace-y-4 md:space-y-0">
           <div className="text-sm text-gray-400 text-center md:text-left">
-            &copy; {new Date().getFullYear()} Heart Disease Prediction App. All
-            rights reserved.
+            &copy; {new Date().getFullYear()} Heart Disease Prediction App
           </div>
           <div className="text-sm text-center text-gray-300">
             Made by <span className="font-semibold text-green-400">Kapil Singh</span>
