@@ -24,19 +24,20 @@ const InfoTooltip = ({ title, description }) => {
         <Info size={16} />
       </button>
       {show && (
-        <div className="absolute z-10 w-64 p-3 bg-gray-700 text-white text-sm rounded-lg shadow-xl left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center">
+        <div className="absolute z-10 w-64 p-3 bg-gray-700 text-white text-sm rounded-lg shadow-xl left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-4/3 flex flex-col items-center justify-center">
           <div className="font-semibold mb-1">{title}</div>
           <div className="text-gray-300">{description}</div>
+          {/* Arrow pointing down to the button */}
+          <div className="absolute top-full left-1/2 transform -translate-x-1/2">
+            <div className="border-[6px] border-transparent border-t-gray-700"></div>
+          </div>
         </div>
       )}
     </div>
   );
 };
 
-/**
- * HeartForm
- * Main form for heart disease prediction.
- */
+
 const HeartForm = () => {
   // About section visibility
   const [showAbout, setShowAbout] = useState(true);
@@ -90,7 +91,7 @@ const HeartForm = () => {
       const result = await predictHeart(formData);
       setPrediction(result);
     } catch (error) {
-      setPrediction("Error: Unable to get prediction. Please try again.",error);
+      setPrediction("Error: Unable to get prediction. Please try again.", error);
     }
     setLoading(false);
   };
@@ -423,13 +424,12 @@ const HeartForm = () => {
           {/* Prediction Result */}
           {prediction && (
             <div
-              className={`mt-6 p-6 text-center font-bold text-lg rounded-xl shadow-lg transform transition-all duration-500 ${
-                prediction.includes("Low")
+              className={`mt-6 p-6 text-center font-bold text-lg rounded-xl shadow-lg transform transition-all duration-500 ${prediction.includes("Low")
                   ? "bg-green-500/30 border-2 border-green-400 text-green-100"
                   : prediction.startsWith("Error")
-                  ? "bg-yellow-500/30 border-2 border-yellow-400 text-yellow-100"
-                  : "bg-red-500/30 border-2 border-red-400 text-red-100"
-              }`}
+                    ? "bg-yellow-500/30 border-2 border-yellow-400 text-yellow-100"
+                    : "bg-red-500/30 border-2 border-red-400 text-red-100"
+                }`}
             >
               <div className="flex items-center justify-center mb-2">
                 {prediction.includes("Low") ? (

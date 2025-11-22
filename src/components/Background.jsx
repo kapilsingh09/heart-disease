@@ -61,6 +61,9 @@ const Background = () => {
         <HeartForm />
       </main>
 
+      <div className="flex-1 px-4 md:px-12 py-6 pt-24 transition-all duration-700">
+            Disclaimer-: if you find any error in the getting responce late its not thee app problem its the api problem from the render because your bro's take this ------plan Your free instance will spin down with inactivity, which can delay requests by 50 seconds or more. <span className="text-green-400">upgrade</span>
+      </div>
       {/* Footer */}
       <footer className="bg-zinc-900/90 text-white border-t border-white/10 py-6 mt-12 backdrop-blur-md">
         <div className="container mx-auto flex flex-col md:flex-row items-center justify-between px-6 mdspace-y-4 md:space-y-0">
